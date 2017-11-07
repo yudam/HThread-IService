@@ -44,7 +44,7 @@ IntentService：Service的一个特殊子类，属于抽象类，因此使用时
         onStart(intent, startId);
         return mRedelivery ? START_REDELIVER_INTENT : START_NOT_STICKY;
     }
-     @Override
+    @Override
     public void onStart(@Nullable Intent intent, int startId) {
         Message msg = mServiceHandler.obtainMessage();
         msg.arg1 = startId;
