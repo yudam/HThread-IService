@@ -25,7 +25,8 @@ HandlerThread：Thread的子类，内部实现了Handler和Looper，有自己的
 
 
 IntentService：Service的一个特殊子类，属于抽象类，因此使用时必须继承并实现该类的抽象方法，内部可以执行后台耗时任务，任务结束自动停止，IntentService是Service的子类，优先级比单纯的线程要高，比较适合执行一些高优先级的任务。内部封装了HandlerThread和ServiceHandler。
- @Override
+    
+     @Override
     public void onCreate() {
 
         super.onCreate();
@@ -37,7 +38,8 @@ IntentService：Service的一个特殊子类，属于抽象类，因此使用时
     }
     
 可以看到在OnCreate方法中初始化了HandlerThread和创建了ServiceHandler，根据Service的启动方式的声明周期：onCreate方法只会执行一次，之后的每一次调用都会执行onStartCommand方法，onStartCommand方法中有调onStart方法。
-@Override
+    
+    @Override
     public int onStartCommand(@Nullable Intent intent, int flags, int startId) {
         onStart(intent, startId);
         return mRedelivery ? START_REDELIVER_INTENT : START_NOT_STICKY;
@@ -52,6 +54,7 @@ IntentService：Service的一个特殊子类，属于抽象类，因此使用时
     
     
    在onStart方法中进行消息的发送，交由ServiceHandler的handleMessage方法处理，注意这里的intent就是我们启动Service时的Intent，通过该Intent可以解析出启动Service的参数。
+    
     private final class ServiceHandler extends Handler {
         public ServiceHandler(Looper looper) {
             super(looper);
@@ -66,7 +69,7 @@ IntentService：Service的一个特殊子类，属于抽象类，因此使用时
     
 ServiceHandler继承自Handler，传递过来的Intent交由onHandleIntent抽象方法处理，因此该方法的处理须有我们继承IntentService自行处理。接下来会调用stopSelf方法停止服务。这里调用的是stopSelf(int startId)，主要是因为stopSelf(int startId)会等到所有消息处理完毕才会结束服务，而stopSelf会立刻结束服务。
 
- public final void stopSelf() {
+     public final void stopSelf() {
         stopSelf(-1);
     }
 
