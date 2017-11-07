@@ -4,7 +4,6 @@ Time：2017年11月7日
 context：HandlerThread+IntentService
 HandlerThread：Thread的子类，内部实现了Handler和Looper，有自己的消息循环机制，主要使用场景IntentService
 
-<php>
      @Override
     public void run() {
         mTid = Process.myTid();
@@ -22,8 +21,6 @@ HandlerThread：Thread的子类，内部实现了Handler和Looper，有自己的
         Looper.loop();
         mTid = -1;
     }
-    </php>
-  
     
 IntentService：Service的一个特殊子类，属于抽象类，因此使用时必须继承并实现该类的抽象方法，内部可以执行后台耗时任务，任务结束自动停止，IntentService是Service的子类，优先级比单纯的线程要高，比较适合执行一些高优先级的任务。内部封装了HandlerThread和ServiceHandler。
  @Override
