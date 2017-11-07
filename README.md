@@ -5,22 +5,22 @@ context：HandlerThread+IntentService
 HandlerThread：Thread的子类，内部实现了Handler和Looper，有自己的消息循环机制，主要使用场景IntentService
 
      @Override
-    public void run() {
-        mTid = Process.myTid();
+    public void run() {//Java
+        mTid = Process.myTid();//Java
         //创建Looper
-        Looper.prepare();
-        synchronized (this) {
+        Looper.prepare();//Java
+        synchronized (this) {//Java
             //获取当前Looper
-            mLooper = Looper.myLooper();
+            mLooper = Looper.myLooper();//Java
             //幻想当前对象监视器上的所有线程
             notifyAll();
         }
-        Process.setThreadPriority(mPriority);
-        onLooperPrepared();
+        Process.setThreadPriority(mPriority);//Java
+        onLooperPrepared();//Java
         //循环读取消息
-        Looper.loop();
-        mTid = -1;
-    }
+        Looper.loop();//Java
+        mTid = -1;//Java
+    }//Java
     
 IntentService：Service的一个特殊子类，属于抽象类，因此使用时必须继承并实现该类的抽象方法，内部可以执行后台耗时任务，任务结束自动停止，IntentService是Service的子类，优先级比单纯的线程要高，比较适合执行一些高优先级的任务。内部封装了HandlerThread和ServiceHandler。
  @Override
