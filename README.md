@@ -1,8 +1,8 @@
 # HThread-IService
-Android开发艺术探索阅读笔记之：HandlerThread+IntentService源码阅读
-Time：2017年11月7日 
-context：HandlerThread+IntentService
-HandlerThread：Thread的子类，内部实现了Handler和Looper，有自己的消息循环机制，主要使用场景IntentService
+Android开发艺术探索阅读笔记之：HandlerThread+IntentService源码阅读  
+Time：2017年11月7日   
+context：HandlerThread+IntentService  
+HandlerThread：Thread的子类，内部实现了Handler和Looper，有自己的消息循环机制，主要使用场景IntentService  
     
      @Override
     public void run() {
