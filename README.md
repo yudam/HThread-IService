@@ -24,6 +24,19 @@ HandlerThread：Thread的子类，内部实现了Handler和Looper，有自己的
 
 
 
+
+#Note
+主线程默认帮我们实现了Looper消息循环机制，因此不需要我们实现这个操作，但是当我们新建了一个线程，若不是实现消息循环而在内部使用Handler就会出现以下错误：
+```
+java.lang.RuntimeException: Can't create handler inside thread that has not called Looper.prepare()
+                                                                     at android.os.Handler.<init>(Handler.java:209)
+                                                                     at android.os.Handler.<init>(Handler.java:123)
+                                                                     at com.mdy.android02.TestThread$1$1.<init>(TestThread.java:0)
+                                                                     at com.mdy.android02.TestThread$1.run(TestThread.java:29)
+                                                                     at java.lang.Thread.run(Thread.java:818)
+                                                                     ```
+可以看出提示我们不可以在没有实现Looper。perpare方法时，在Thread内部实现Handler。简单来说HandlerThread就是一个系统帮我们封装好了的实现了Looper的线程。                                                
+
 IntentService：Service的一个特殊子类，属于抽象类，因此使用时必须继承并实现该类的抽象方法，内部可以执行后台耗时任务，任务结束自动停止，IntentService是Service的子类，优先级比单纯的线程要高，比较适合执行一些高优先级的任务。内部封装了HandlerThread和ServiceHandler。
     
      @Override
